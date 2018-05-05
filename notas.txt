@@ -1,0 +1,24 @@
+Modelo:
+Define funciones que toman como argumento, como mínimo, la conexión de la base de datos.
+La función hace la consulta a la base de datos y duevuelve los datos.
+
+
+Controlador:
+Incluye los modelos que use.
+
+Crea la conexión a la base de datos al principio del archivo y termina la conexión al final.
+
+Hace las comprobaciones de sesión ($_SESSION)
+
+Hace las comprobaciones de los formularios ($_GET, $_POST, $_REQUEST)
+
+Define funciones que usan las funciones del modelo correspondiente (pasándole la conexión creada) y devuelve los datos.
+
+
+Vistas:
+Incluye el controlador de la vista.
+
+Al principio del archivo define las variables con los datos que se van a usar en el html. Se usan las funciones definidas en 
+el controlador para llenar de datos esas variables.
+
+Después incluye el header, la página en html y el footer.
