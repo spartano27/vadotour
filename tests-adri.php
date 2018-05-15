@@ -8,4 +8,3 @@ include_once "core/db.php";
 
 $con = crearConexionBD();
 ?>
-

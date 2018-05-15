@@ -21,13 +21,25 @@ $citas = getCitasFiltradas();
 
     <table>
         <tr>
-            <th></th>
             <th>Fecha</th>
             <th>Tipo</th>
             <th>Descripcion</th>
-            <th>Estado</th>
-            <th></th>
+            <th>Aceptada</th>
+            <th>Anulada</th>
         </tr>
+        <?php
+        foreach($citas as $cita){
+            
+            echo "<tr> 
+            <td>" . $cita['FECHA'] . "</td>
+            <td>" . $cita['ID_TIPO_CITA'] . "</td>
+            <td>" . $cita['NOTA'] . "</td>
+            <td>" . $cita['ACEPTADA'] . "</td>
+            <td>" . $cita['ANULADO'] . "</td>
+            </tr>";
+            
+        }
+        ?>
 
     </table>
 

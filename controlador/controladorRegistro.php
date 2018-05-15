@@ -1,3 +1,3 @@
 <?php
 
-include_once "modelo/modeloCliente.php"
+include_once "modelo/modeloCliente.php";
