@@ -1,17 +1,22 @@
 <?php
 
+$tipos = [];
 
+
+function getTiposCitasDB(){
+
+}
 
 function getCitasFiltradasDB(PDO $con, array $filtros){
 
     $condiciones = [];
     $filtrosOrdenados = [];
 
-    if(!empty($filtros['ID_USUARIO'])){
+    if(isset($filtros['ID_USUARIO'])){
         $condiciones[] = 'ID_USUARIO = ?';
         $filtrosOrdenados[] = $filtros['ID_USUARIO'];
     }
-    if(!empty($filtros['ID_TIPO_CITA'])){
+    if(isset($filtros['ID_TIPO_CITA'])){
         $condiciones[] = 'ID_TIPO_CITA = ?';
         $filtrosOrdenados[] = $filtros['ID_TIPO_CITA'];
     }
@@ -19,11 +24,11 @@ function getCitasFiltradasDB(PDO $con, array $filtros){
         $condiciones[] = "FECHA = TO_DATE(?, 'dd-mm-yyyy')";
         $filtrosOrdenados[] = $filtros['FECHA'];
     }
-    if(!empty($filtros['ACEPTADA'])){
+    if(isset($filtros['ACEPTADA'])){
         $condiciones[] = 'ACEPTADA = ?';
         $filtrosOrdenados[] = $filtros['ACEPTADA'];
     }
-    if(!empty($filtros['ANULADO'])){
+    if(isset($filtros['ANULADO'])){
         $condiciones[] = 'ANULADO = ?';
         $filtrosOrdenados[] = $filtros['ANULADO'];
     }
@@ -31,6 +36,7 @@ function getCitasFiltradasDB(PDO $con, array $filtros){
     $sql = "SELECT ID_CITA, ID_USUARIO, ID_TIPO_CITA, FECHA, DURACION, ACEPTADA, ANULADO, NOTA
             FROM cita";
 
+    // Agrega las condiciones de WHERE en función de los filtros seleccionados.
     if($condiciones){
         $sql .= " WHERE ".implode(" AND ", $condiciones);
     }
