@@ -1,10 +1,14 @@
 <?php
 
-$tipos = [];
 
-
-function getTiposCitasDB(){
-
+function getTiposCitasDB(PDO $con){
+    $stmt = $con->prepare("SELECT ID_TIPO_CITA, TIPO_CITA FROM TIPO_CITA");
+    $stmt->execute();
+    $tipos = [];
+    foreach($stmt->fetchAll() as $tipo){
+        $tipos[$tipo["ID_TIPO_CITA"]] = $tipo["TIPO_CITA"];
+    }
+    return $tipos;
 }
 
 function getCitasFiltradasDB(PDO $con, array $filtros){
@@ -32,6 +36,15 @@ function getCitasFiltradasDB(PDO $con, array $filtros){
         $condiciones[] = 'ANULADO = ?';
         $filtrosOrdenados[] = $filtros['ANULADO'];
     }
+    if(isset($filtros['FECHA_INICIO'])){
+        $condiciones[] = "FECHA >= TO_DATE(?, 'yyyy-mm-dd')";
+        $filtrosOrdenados[] = $filtros['FECHA_INICIO'];
+    }
+
+    if(isset($filtros['FECHA_FIN'])){
+        $condiciones[] = "FECHA <= TO_DATE(?, 'yyyy-mm-dd')";
+        $filtrosOrdenados[] = $filtros['FECHA_FIN'];
+    }
 
     $sql = "SELECT ID_CITA, ID_USUARIO, ID_TIPO_CITA, FECHA, DURACION, ACEPTADA, ANULADO, NOTA
             FROM cita";
@@ -40,6 +53,8 @@ function getCitasFiltradasDB(PDO $con, array $filtros){
     if($condiciones){
         $sql .= " WHERE ".implode(" AND ", $condiciones);
     }
+
+    $sql .= " ORDER BY FECHA DESC";
 
     $stmt = $con->prepare($sql);
     $stmt->execute($filtrosOrdenados);

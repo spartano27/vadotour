@@ -1,2 +1,13 @@
+.column {
+    display: flex;
+    flex-direction: column;
+}
 
+.row {
+    display: flex;
+    flex-flow: row wrap;
+}
 
+.grow1{
+    flex-grow: 1;
+}
