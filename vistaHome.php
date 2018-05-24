@@ -1,11 +1,8 @@
 <?php
 
 include_once "controlador/controladorHome.php";
+include_once "header.php";	
 
-$usuario = "Rxuben";
+
 
 ?>
-
-<div>
-    Hola, <?php echo $usuario[""] ?>, que tal?
-</div>
