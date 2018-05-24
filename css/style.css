@@ -11,3 +11,30 @@
 .grow1{
     flex-grow: 1;
 }
+
+#logo{
+	width: 15%;
+}
+
+.form-1{
+	float: right;
+}
+
+.field, .submit{
+	float: left;
+}
+
+h3{
+	font-family: "Arial","Ubuntu";
+}
+
+.error{
+    color: red;
+    /* float: right; */
+    position: fixed;
+    right: 3em;
+    top: 7em;}
+
+    div#MiCuenta {
+    float: right;
+}
