@@ -25,7 +25,7 @@
 }
 
 h3{
-	font-family: "Arial","Ubuntu";
+	font-family: "Ubuntu";
 }
 
 .error{
@@ -37,4 +37,35 @@ h3{
 
     div#MiCuenta {
     float: right;
+}
+
+
+/*estilos del menú */
+
+#menu {
+    list-style-type: none;
+    margin-top: 30px;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+#menu li {
+    float: left;
+}
+
+#menu li a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#menu li a:hover {
+    background-color: #111;
+}
+
+#menu .active {
+    background-color: red;
 }
