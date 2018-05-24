@@ -38,7 +38,14 @@ if (isset($_SESSION['logueado'])) {
 		<input type="submit" name="cerrar" value="Cerrar sesión">
 	</form>
 	</div>
-
+<!-- menú horizontal -->
+	<ul id="menu">
+	  <li><a href="vistaHome.php" class="active">Inicio</a></li>
+	  <li><a href="#">Elemento 2</a></li>
+	  <li><a href="#">Elemento 3</a></li>
+	  <li><a href="#">Elemento 4</a></li>
+	</ul>
+	<!-- fin menú -->
 <?php
 }
 else{
