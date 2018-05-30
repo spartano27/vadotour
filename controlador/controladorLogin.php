@@ -12,7 +12,7 @@ session_start();
 	}
 
 	
-	if (isset($_REQUEST['entrar'])) {
+	if (isset($_REQUEST['entrar']) || isset($_REQUEST['entrarAdmin'])) {
 		$user=$_REQUEST['usuario']; $pass=$_REQUEST['clave'];
 
 	
@@ -20,16 +20,18 @@ session_start();
 		//consulto si hay algun usuario con el email recibido
 
 		$usuarioBD=getUsuarioBD($conex,$user);
-
-
-	
 		$claveEncript=md5($_REQUEST['clave']);
 
+		
 		//Si usuarioBD está vacío no hay ningún usuario con ese email
 
 		if(empty($usuarioBD)){
 			echo "<span class='error'> No existe el usuario</span>";
 
+		}
+		else if ($usuarioBD[0][5]==1) {
+			echo "<span class='error'> El usuario administrador no puede iniciar sesión desde esta página</span>";
+			
 		}
 		//en el caso de que el usuario exista y la clave no coincida mostrará un error
 		// $usuarioBD[0][4] es la contraseña almacenada en la BBDD
