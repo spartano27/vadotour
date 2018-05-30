@@ -23,55 +23,55 @@ include_once 'controlador/controladorLogin.php';
 
 
 
-<div id="header">
+<header>
 	<img id="logo" src="images/logo.jpg">
 
 	<?php
 
-if (isset($_SESSION['logueado'])) {
-	echo "<div id='MiCuenta'>";
-	echo "<span class='wcme'>Bienvenido a VadoTour, ".$_SESSION['nombre']."</span>";
+	if (isset($_SESSION['logueado'])) {
+		echo "<div id='MiCuenta'>";
+		echo "<span class='wcme'>Bienvenido a VadoTour, ".$_SESSION['nombre']."</span>";
 
+		?>
+
+		<form action="" method="POST">
+			<input type="submit" name="cerrar" value="Cerrar sesión">
+		</form>
+		</div>
+	<!-- menú horizontal -->
+		<ul id="menu">
+		  <li><a href="vistaHome.php" class="active">Inicio</a></li>
+		  <li><a href="vistaExposicionVehiculos.php">Vehículos del concesionario</a></li>
+		  <li><a href="vistaMisReparaciones.php">Mis reparaciones</a></li>
+		  <li><a href="#">Elemento 4</a></li>
+		</ul>
+		<!-- fin menú -->
+	<?php
+	}
+	else{
 	?>
 
-	<form action="" method="POST">
-		<input type="submit" name="cerrar" value="Cerrar sesión">
-	</form>
-	</div>
-<!-- menú horizontal -->
-	<ul id="menu">
-	  <li><a href="vistaHome.php" class="active">Inicio</a></li>
-	  <li><a href="#">Elemento 2</a></li>
-	  <li><a href="#">Elemento 3</a></li>
-	  <li><a href="#">Elemento 4</a></li>
-	</ul>
-	<!-- fin menú -->
-<?php
-}
-else{
-?>
+
+		<form action="" method="POST" class="form-1">
+
+			<h3>Inicia sesión en Vadotour</h3>
 
 
-	<form action="" method="POST" class="form-1">
-
-		<h3>Inicia sesión en Vadotour</h3>
-
-
-		
-		<p class="field">
-			<input type="text" name="usuario" value="">
 			
-		</p>
-		<p class="field">
-	 		<input type="password" name="clave" value="">
-		</p>
-		<p class="submit">
-			<input type="submit" name="entrar" value="Entrar">
-		</p>
+			<p class="field">
+				<input type="text" name="usuario" value="">
+				
+			</p>
+			<p class="field">
+		 		<input type="password" name="clave" value="">
+			</p>
+			<p class="submit">
+				<input type="submit" name="entrar" value="Entrar">
+			</p>
 
-		</form>
-<?php }?>
+			</form>
+	<?php }?>
 
-<hr>
+	<hr>
 
-</div>
+<header>
