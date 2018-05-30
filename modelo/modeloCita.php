@@ -46,7 +46,7 @@ function getCitasFiltradasDB(PDO $con, array $filtros){
         $filtrosOrdenados[] = $filtros['FECHA_FIN'];
     }
 
-    $sql = "SELECT ID_CITA, ID_USUARIO, TC.TIPO_CITA, TO_CHAR(FECHA, 'DD-MM-YYYY HH24:MI:SS') AS FECHA, DURACION, ACEPTADA, ANULADO, NOTA
+    $sql = "SELECT ID_CITA, ID_USUARIO, TC.ID_TIPO_CITA, TC.TIPO_CITA, TO_CHAR(FECHA, 'DD-MM-YYYY HH24:MI:SS') AS FECHA, DURACION, ACEPTADA, ANULADO, NOTA
             FROM cita
             JOIN TIPO_CITA TC on CITA.ID_TIPO_CITA = TC.ID_TIPO_CITA";
 
