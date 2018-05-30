@@ -5,8 +5,6 @@ include_once "modelo/modeloCita.php";
 
 $con = crearConexionBD();
 
-$tiposCita = getTiposCitasDB($con);
-
 $filtros = ["ID_USUARIO" => 2];
 
 // Se ha pulsado el boton de filtrar
@@ -90,5 +88,3 @@ function fechas(array $todasCitas,array $citasFiltradas){
     }
     return $fechas;
 }
-
-?>
