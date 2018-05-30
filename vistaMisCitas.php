@@ -73,7 +73,7 @@ $fechas = fechas($todasCitas, $citasFiltradas);
             foreach($citasFiltradas as $cita){
                 echo "<tr> 
                 <td>" . $cita['FECHA'] . "</td>
-                <td>" . $tiposCita[$cita['ID_TIPO_CITA']] . "</td>
+                <td>" . $cita['TIPO_CITA'] . "</td>
                 <td>" . $cita['NOTA'] . "</td>
                 <td>" . $cita['ACEPTADA'] . "</td>
                 <td>" . $cita['ANULADO'] . "</td>
