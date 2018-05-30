@@ -7,9 +7,7 @@ session_start();
 		session_destroy();
 		header("Location:vistaHome.php");
 
-		echo $_SESSION['logueado'];
-		echo $_SESSION['nombre'];
-		echo "???";
+		
 	}
 
 	
