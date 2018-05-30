@@ -1,5 +1,5 @@
 <?php
-
+include_once "header.php";
 include_once "controlador/controladorMisCitas.php";
 
 // Se obtienen todas las citas para obtener la fecha de la primera y ultima cita y ayudar en el filtrado del calendario
@@ -11,11 +11,11 @@ $fechas = fechas($todasCitas, $citasFiltradas);
 
 ?>
 
-<?php include_once "header.php"?>
-
 <div class="main-container column">
     <section class="row">
-        <form id="filtro-citas" action="vistaMisCitas.php" method="post" class="grow1">
+        <form id="filtro-citas" action="vistaMisCitas.php" method="post">
+            <fieldset style="width: 90vw">
+                <legend align="left">Filtro</legend>
             <div>
                 <label for="fecha-inicio">Desde </label>
                 <input name="fecha-inicio" title="Citas desde la fecha" type="date"
@@ -52,11 +52,9 @@ $fechas = fechas($todasCitas, $citasFiltradas);
             </div>
             <input name="filtrar" type="submit" value="Filtrar">
             <input name="mostrar-todas" type="submit" value="Mostrar todas">
+        </fieldset>
         </form>
 
-        <div class="grow1">
-            Calendario
-        </div>
 
     </section>
 
@@ -73,9 +71,13 @@ $fechas = fechas($todasCitas, $citasFiltradas);
             foreach($citasFiltradas as $cita){
                 echo "<tr> 
                 <td>" . $cita['FECHA'] . "</td>
-                <td>" . $cita['TIPO_CITA'] . "</td>
-                <td>" . $cita['NOTA'] . "</td>
-                <td>" . $cita['ACEPTADA'] . "</td>
+                <td>" . $cita['TIPO_CITA'] . "</td>";
+                if($cita['ID_TIPO_CITA'] == 0 && $cita['ACEPTADA'] == 1){
+                    echo "<td><a href='vistaReparacion.php?idCita=" . $cita['ID_CITA'] ."'>" . $cita['NOTA'] . "</a></td>";
+                }else {
+                    echo "<td>" . $cita['NOTA'] . "</td>";
+                }
+                echo "<td>" . $cita['ACEPTADA'] . "</td>
                 <td>" . $cita['ANULADO'] . "</td>
                 </tr>";
             }

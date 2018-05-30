@@ -8,10 +8,10 @@ if (!$conex) {
     trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 }
 
-
-
 include_once 'controlador/controladorLogin.php';
 
+$esCliente = $_SESSION["logueado"];
+$esAdmin = $_SESSION["es_admin"];
 
 
 ?>
@@ -40,10 +40,23 @@ include_once 'controlador/controladorLogin.php';
 		</div>
 	<!-- menú horizontal -->
 		<ul id="menu">
-		  <li><a href="vistaHome.php" class="active">Inicio</a></li>
-		  <li><a href="vistaExposicionVehiculos.php">Vehículos del concesionario</a></li>
-		  <li><a href="vistaMisReparaciones.php">Mis reparaciones</a></li>
-		  <li><a href="#">Elemento 4</a></li>
+            <li><a href="vistaHome.php" class="active">Inicio</a></li>
+            <li><a href="vistaExposicionVehiculos.php">Vehículos del concesionario</a></li>
+            <?php
+                if($esCliente && !$esAdmin){
+                    echo '<li class="boton-pedir-cita"><a href="vistaPedirCita.php">Pedir Cita</a></li>';
+                    echo '<li><a href="vistaMisCitas.php">Mis citas</a></li>';
+                    echo '<li><a href="vistaMisReparaciones.php">Mis reparaciones</a></li>';
+                }
+
+                if($esAdmin){
+                    echo '<li><a href="vistaDatosClientesAdmin.php">Datos de clientes</a></li>';
+                    echo '<li><a href="vistaCitasAdmin.php">Citas de clientes</a></li>';
+                    echo '<li><a href="vistaReparacionesAdmin.php">Reparaciones de clientes</a></li>';
+                }
+            ?>
+
+
 		</ul>
 		<!-- fin menú -->
 	<?php
@@ -74,4 +87,4 @@ include_once 'controlador/controladorLogin.php';
 
 	<hr>
 
-<header>
+</header>

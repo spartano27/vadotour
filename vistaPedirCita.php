@@ -1,5 +1,5 @@
 <?php
-
+include_once "header.php";
 include_once "controlador/controladorPedirCita.php";
 
 $fechaAhora = date("Y-m-d", time());
@@ -7,9 +7,6 @@ $fechaSemanaSiguiente = date("Y-m-d", time() +  (7 * 24 * 60 * 60));
 $huecosOcupadosProximaSemana = huecosOcupadosProximaSemana();
 
 ?>
-
-<?php include_once "header.php"?>
-
 <div class="main-container column">
 
     <form id="pedir-cita" action="vistaPedirCita.php" method="post">
@@ -41,7 +38,7 @@ $huecosOcupadosProximaSemana = huecosOcupadosProximaSemana();
         </div>
         <div>
             <p><label for="crear-cita-nota">Notas extras: </label></p>
-            <input id="crear-cita-nota" type="text" name="nota">
+            <textarea id="crear-cita-nota" type="text" name="nota" style="width: 80%; height: 50px"></textarea>
         </div>
 
         <p>

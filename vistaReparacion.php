@@ -1,5 +1,5 @@
 <?php
-
+include_once "header.php";
 include_once "controlador/controladorReparacion.php";
 
 $reparacion = reparacion();
@@ -7,9 +7,6 @@ $comentarios = comentarios();
 $formAction = "vistaReparacion.php?idCita=" . $idCita;
 
 ?>
-
-<?php include_once "header.php"?>
-
 <div>
     <p>Vehículo: <?php echo $reparacion["MODELO"] . " (" . $reparacion["MATRICULA"] . ")"?></p>
     <p>Estado: <?php echo $reparacion["ESTADO"] ?></p>
