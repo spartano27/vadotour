@@ -95,3 +95,7 @@ h3{
     max-width: 100%;
     height: auto;
 }
+
+.menu-item-admin{
+    float: right;
+}
