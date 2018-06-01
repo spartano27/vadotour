@@ -96,6 +96,6 @@ h3{
     height: auto;
 }
 
-.menu-item-admin{
+#menu .menu-item-admin{
     float: right;
 }
