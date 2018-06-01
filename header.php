@@ -33,6 +33,9 @@ $esAdmin = isset($_SESSION["es_admin"]) && $_SESSION["es_admin"] == 1 ? true : f
 
 		?>
 
+        <p>
+            <a href="vistaMiCuenta.php"><button type="button">Mi Cuenta</button></a>
+        </p>
 		<form action="" method="POST">
 			<input type="submit" name="cerrar" value="Cerrar sesión">
 		</form>
@@ -41,8 +44,6 @@ $esAdmin = isset($_SESSION["es_admin"]) && $_SESSION["es_admin"] == 1 ? true : f
         <form action="" method="POST" class="form-1">
 
             <h3>Inicia sesión en Vadotour</h3>
-
-
 
             <p class="field">
                 <input type="text" name="usuario" value="">
@@ -53,6 +54,9 @@ $esAdmin = isset($_SESSION["es_admin"]) && $_SESSION["es_admin"] == 1 ? true : f
             </p>
             <p class="submit">
                 <input type="submit" name="entrar" value="Entrar">
+            </p>
+            <p class="submit">
+                <a href="vistaRegistro.php"><button type="button">Registro</button></a>
             </p>
 
         </form>

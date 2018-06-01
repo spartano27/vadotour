@@ -1,7 +1,7 @@
 <!-- nombre, apellidos, email, contraseña, dni, localidad, provincia, cp -->
 
 <?php
-
+include_once "header.php";
 include_once "controlador/controladorRegistro.php";
 ?>
 
