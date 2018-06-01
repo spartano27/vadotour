@@ -104,7 +104,7 @@ function getHuecosOcupadosEntre(PDO $con,string $fechaInicio, string $fechaFin){
     return $huecosOcupados;
 }
 
-function nuevaCita(PDO $con, int $idUser, int $fecha, int $tipoCita, string $nota){
+function createCita(PDO $con, int $idUser, int $fecha, int $tipoCita, string $nota){
 
     $parametros = [$idUser, date("Y-m-d H:i:s"  , $fecha), $tipoCita, $nota];
     $stmt = $con->prepare("INSERT INTO CITA(ID_USUARIO, FECHA, ID_TIPO_CITA, NOTA) 
