@@ -27,6 +27,6 @@ if(isset($_REQUEST["crearCita"])){
 
     $fechaYHora = $fecha . " " . $hora . ":" . $minutos . ":00";
 
-    nuevaCita($con, $idUser, strtotime($fechaYHora), $tipoCita, $nota);
+    createCita($con, $idUser, strtotime($fechaYHora), $tipoCita, $nota);
 
 }

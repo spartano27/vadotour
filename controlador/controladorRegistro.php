@@ -42,7 +42,7 @@ if (!preg_match('/^.*\@.*\..*$/i', $_REQUEST['email'])){
     }
 
 
-if (!preg_match('/^.{5,30}$/', $_REQUEST['password'])){
+if (!preg_match('/^.{4,30}$/', $_REQUEST['password'])){
     $correcto = 0;
     $error2 = "
     <span class = 'error'> Contraseña inválida.</span>";
@@ -112,11 +112,10 @@ if (!preg_match('/^[0-9]{9}$/', $_REQUEST['telefono'])){
     $valor11= '';
    }
 if($correcto == 1){
-    $datosUsuario = ["nombre" => $_REQUEST['nombre'], "apellidos" => $_REQUEST['apellidos'], "email" => $_REQUEST['email'], "password" => $_REQUEST['password']];
-    $datosCliente = ["dni" => $_REQUEST['dni'], "nacimiento" => $_REQUEST['nacimiento'], "localidad" => $_REQUEST['localidad'], "provincia" => $_REQUEST['provincia'], "cp" => $_REQUEST['cp'], "direccion" => $_REQUEST['direccion'], "telefono" => $_REQUEST['telefono'] ];
+    $datosUsuario = [$_REQUEST['nombre'], $_REQUEST['apellidos'], $_REQUEST['email'], md5($_REQUEST['password'])];
+    $datosCliente = [$_REQUEST['dni'], $_REQUEST['localidad'], $_REQUEST['provincia'], $_REQUEST['direccion'], $_REQUEST['cp'], $_REQUEST['telefono'] ];
     registroCliente($con, $datosUsuario, $datosCliente);
 }
 echo $error1. $error2. $error3. $error4. $error5. $error6. $error7. $error8. $error9. $error10. $error11;
-echo 
 
 }
