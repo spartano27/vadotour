@@ -29,7 +29,7 @@ session_start();
 			echo "<span class='error'> No existe el usuario</span>";
 
 		}
-		else if ($usuarioBD[0][5]==1) {
+		else if (!isset($_REQUEST['entrarAdmin'])&&$usuarioBD[0][5]==1) {
 			echo "<span class='error'> El usuario administrador no puede iniciar sesión desde esta página</span>";
 			
 		}
@@ -46,7 +46,7 @@ session_start();
 			$_SESSION['id_usuario']=$usuarioBD[0][0];
 			$_SESSION['es_admin']=$usuarioBD[0][5];
 
-
+		header("Location:vistaHome.php");
 		
 		}}
 
