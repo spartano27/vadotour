@@ -74,9 +74,17 @@ function getVehiculosCliente(PDO $con, array $id_veh_cliente){
 
 function getVehiculo(PDO $con, int $id_veh_cliente){
 	//retorna modelo y marca pasandole un id veh
-    $stmt = $con->prepare("SELECT MODELO, MARCA FROM VEHICULO WHERE ID_VEHICULO = ?");
+    $stmt = $con->prepare("SELECT MODELO, MARCA,FECHA_ANYO,ID_VEHICULO FROM VEHICULO WHERE ID_VEHICULO = ?");
     $id_vehiculo_array[0] = $id_veh_cliente;
     $stmt ->execute($id_vehiculo_array);
     $vehiculos = $stmt->fetchAll();
     return $vehiculos;
+}
+
+function getMatricula(PDO $con, int $id_veh_cliente){
+	 $stmt = $con->prepare("SELECT MATRICULA FROM VEHICULO_CLIENTE where ID_VEHICULO = ?");
+    $id_vehiculo_array[0] = $id_veh_cliente;
+    $stmt ->execute($id_vehiculo_array);
+    $matricula = $stmt->fetchAll();
+    return $matricula;
 }
