@@ -10,13 +10,12 @@ if (!$conex) {
 
 include_once 'controlador/controladorLogin.php';
 
-$esCliente = $_SESSION["logueado"];
-$esAdmin = $_SESSION["es_admin"];
+$esCliente = isset($_SESSION["logueado"]) ? true: false;
+$esAdmin = isset($_SESSION["es_admin"]) && $_SESSION["es_admin"] == 1 ? true : false;
 
 
 ?>
 <head>
-
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
@@ -28,7 +27,7 @@ $esAdmin = $_SESSION["es_admin"];
 
 	<?php
 
-	if (isset($_SESSION['logueado'])) {
+	if ($esCliente) {
 		echo "<div id='MiCuenta'>";
 		echo "<span class='wcme'>Bienvenido a VadoTour, ".$_SESSION['nombre']."</span>";
 
@@ -38,53 +37,47 @@ $esAdmin = $_SESSION["es_admin"];
 			<input type="submit" name="cerrar" value="Cerrar sesión">
 		</form>
 		</div>
+        <?php } else { ?>
+        <form action="" method="POST" class="form-1">
+
+            <h3>Inicia sesión en Vadotour</h3>
+
+
+
+            <p class="field">
+                <input type="text" name="usuario" value="">
+
+            </p>
+            <p class="field">
+                <input type="password" name="clave" value="">
+            </p>
+            <p class="submit">
+                <input type="submit" name="entrar" value="Entrar">
+            </p>
+
+        </form>
+    <?php } ?>
 	<!-- menú horizontal -->
 		<ul id="menu">
             <li><a href="vistaHome.php" class="active">Inicio</a></li>
             <li><a href="vistaExposicionVehiculos.php">Vehículos del concesionario</a></li>
             <?php
                 if($esCliente && !$esAdmin){
-                    echo '<li class="boton-pedir-cita"><a href="vistaPedirCita.php">Pedir Cita</a></li>';
+                    echo '<li class="menu-pedir-cita"><a href="vistaPedirCita.php">Pedir Cita</a></li>';
                     echo '<li><a href="vistaMisCitas.php">Mis citas</a></li>';
                     echo '<li><a href="vistaMisReparaciones.php">Mis reparaciones</a></li>';
                 }
 
                 if($esAdmin){
-                    echo '<li><a href="vistaDatosClientesAdmin.php">Datos de clientes</a></li>';
-                    echo '<li><a href="vistaCitasAdmin.php">Citas de clientes</a></li>';
-                    echo '<li><a href="vistaReparacionesAdmin.php">Reparaciones de clientes</a></li>';
+                    echo '<li class="menu-item-admin"><a href="vistaDatosClienteAdmin.php">Datos de clientes</a></li>';
+                    echo '<li class="menu-item-admin"><a href="vistaCitasAdmin.php">Citas de clientes</a></li>';
+                    echo '<li class="menu-item-admin"><a href="vistaReparacionesAdmin.php">Reparaciones de clientes</a></li>';
                 }
             ?>
 
 
 		</ul>
 		<!-- fin menú -->
-	<?php
-	}
-	else{
-	?>
-
-
-		<form action="" method="POST" class="form-1">
-
-			<h3>Inicia sesión en Vadotour</h3>
-
-
-			
-			<p class="field">
-				<input type="text" name="usuario" value="">
-				
-			</p>
-			<p class="field">
-		 		<input type="password" name="clave" value="">
-			</p>
-			<p class="submit">
-				<input type="submit" name="entrar" value="Entrar">
-			</p>
-
-			</form>
-	<?php }?>
-
 	<hr>
 
 </header>
