@@ -17,3 +17,16 @@ if (isset($_REQUEST['addVeh'])){
 	addVehCliente($conex, $_REQUEST['modelo'],$_REQUEST['marca'],$_REQUEST['idUsuario'],$_REQUEST['anyo'],$_REQUEST['matricula']);
 
 }
+
+if(isset($_REQUEST['modVeh'])){
+	$modForm=1;
+
+
+}
+if (isset($_REQUEST['addVeh1'])) {
+	updateVehCliente($conex,$_REQUEST['modelo'],$_REQUEST['marca'],$_REQUEST['idUsuario'],$_REQUEST['anyo'],$_REQUEST['matricula'],$_REQUEST['idVeh']);
+}
+
+if(isset($_REQUEST['elimVeh'])){
+	deleteVehCliente($conex,$_REQUEST['idVeh']);
+}
