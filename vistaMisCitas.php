@@ -59,7 +59,7 @@ $fechas = fechas($todasCitas, $citasFiltradas);
     </section>
 
     <section>
-        <table>
+        <table border="1">
             <tr>
                 <th>Fecha</th>
                 <th>Tipo</th>
@@ -72,7 +72,7 @@ $fechas = fechas($todasCitas, $citasFiltradas);
                 echo "<tr> 
                 <td>" . $cita['FECHA'] . "</td>
                 <td>" . $cita['TIPO_CITA'] . "</td>";
-                if($cita['ID_TIPO_CITA'] == 0 && $cita['ACEPTADA'] == 1){
+                if($cita['ID_TIPO_CITA'] == 0 && $cita['ACEPTADA'] == 1 && isset($cita['ID_EST_REP']) && $cita['ID_EST_REP'] > 2){
                     echo "<td><a href='vistaReparacion.php?idCita=" . $cita['ID_CITA'] ."'>" . $cita['NOTA'] . "</a></td>";
                 }else {
                     echo "<td>" . $cita['NOTA'] . "</td>";

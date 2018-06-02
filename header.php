@@ -1,6 +1,7 @@
 <?php 
 
 include_once "core/db.php";
+include_once "core/utils.php";
 $conex= crearConexionBD();
 
 if (!$conex) {
