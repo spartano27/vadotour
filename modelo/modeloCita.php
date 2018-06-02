@@ -17,45 +17,48 @@ function getCitasFiltradasDB(PDO $con, array $filtros){
     $filtrosOrdenados = [];
 
     if(isset($filtros['ID_USUARIO'])){
-        $condiciones[] = 'ID_USUARIO = ?';
+        $condiciones[] = 'C.ID_USUARIO = ?';
         $filtrosOrdenados[] = $filtros['ID_USUARIO'];
     }
     if(isset($filtros['ID_TIPO_CITA'])){
-        $condiciones[] = 'ID_TIPO_CITA = ?';
+        $condiciones[] = 'C.ID_TIPO_CITA = ?';
         $filtrosOrdenados[] = $filtros['ID_TIPO_CITA'];
     }
     if(!empty($filtros['FECHA'])){
-        $condiciones[] = "FECHA = TO_DATE(?, 'dd-mm-yyyy')";
+        $condiciones[] = "C.FECHA = TO_DATE(?, 'dd-mm-yyyy')";
         $filtrosOrdenados[] = $filtros['FECHA'];
     }
     if(isset($filtros['ACEPTADA'])){
-        $condiciones[] = 'ACEPTADA = ?';
+        $condiciones[] = 'C.ACEPTADA = ?';
         $filtrosOrdenados[] = $filtros['ACEPTADA'];
     }
     if(isset($filtros['ANULADO'])){
-        $condiciones[] = 'ANULADO = ?';
+        $condiciones[] = 'C.ANULADO = ?';
         $filtrosOrdenados[] = $filtros['ANULADO'];
     }
     if(isset($filtros['FECHA_INICIO'])){
-        $condiciones[] = "FECHA >= TO_DATE(?, 'yyyy-mm-dd')";
+        $condiciones[] = "C.FECHA >= TO_DATE(?, 'yyyy-mm-dd')";
         $filtrosOrdenados[] = $filtros['FECHA_INICIO'];
     }
 
     if(isset($filtros['FECHA_FIN'])){
-        $condiciones[] = "FECHA <= TO_DATE(?, 'yyyy-mm-dd')";
+        $condiciones[] = "C.FECHA <= TO_DATE(?, 'yyyy-mm-dd')";
         $filtrosOrdenados[] = $filtros['FECHA_FIN'];
     }
 
-    $sql = "SELECT ID_CITA, ID_USUARIO, TC.ID_TIPO_CITA, TC.TIPO_CITA, TO_CHAR(FECHA, 'DD-MM-YYYY HH24:MI:SS') AS FECHA, DURACION, ACEPTADA, ANULADO, NOTA
-            FROM cita
-            JOIN TIPO_CITA TC on CITA.ID_TIPO_CITA = TC.ID_TIPO_CITA";
+    $sql = "SELECT C.ID_CITA, C.ID_USUARIO, TO_CHAR(C.FECHA, 'DD-MM-YYYY HH24:MI:SS') AS FECHA, C.DURACION, C.ACEPTADA, C.ANULADO, C.NOTA,
+                   TC.ID_TIPO_CITA, TC.TIPO_CITA,
+                   U.NOMBRE
+            FROM CITA C
+            JOIN USUARIO U on C.ID_USUARIO = U.ID_USUARIO
+            JOIN TIPO_CITA TC on C.ID_TIPO_CITA = TC.ID_TIPO_CITA";
 
     // Agrega las condiciones de WHERE en función de los filtros seleccionados.
     if($condiciones){
         $sql .= " WHERE ".implode(" AND ", $condiciones);
     }
 
-    $sql .= " ORDER BY FECHA DESC";
+    $sql .= " ORDER BY C.FECHA DESC";
 
     $stmt = $con->prepare($sql);
     $stmt->execute($filtrosOrdenados);
@@ -114,7 +117,10 @@ function createCita(PDO $con, int $idUser, int $fecha, int $tipoCita, string $no
 }
 
 function getReparacionDeCita(PDO $con, int $idCita){
-    $stmt = $con->prepare("SELECT  R.ID_REP, R.FECHA_COMIENZO, R.FECHA_ESTIMADA_FINALIZACION, R.FECHA_FINALIZACION, R.VALORACION,
+
+
+
+    $stmt = $con->prepare("SELECT  R.ID_REP, R.ID_EST_REP, R.FECHA_COMIENZO, R.FECHA_ESTIMADA_FINALIZACION, R.FECHA_FINALIZACION, R.VALORACION,
                                             E.ESTADO,
                                             C.NOTA, C.ANULADO, C.ACEPTADA, C.DURACION, C.FECHA, C.ID_CITA, C.ID_USUARIO,
                                             TC.ID_TIPO_CITA, TC.TIPO_CITA,
@@ -126,10 +132,29 @@ function getReparacionDeCita(PDO $con, int $idCita){
                                     JOIN VEHICULO V on VC.ID_VEHICULO = V.ID_VEHICULO
                                     JOIN ESTADO_REPARACION E on R.ID_EST_REP = E.ID_EST_REP
                                     JOIN TIPO_CITA TC on C.ID_TIPO_CITA = TC.ID_TIPO_CITA
-                                    WHERE C.ID_CITA= ?");
+                                    WHERE C.ID_CITA= ?
+                                    ORDER BY C.FECHA DESC");
     $stmt->execute([$idCita]);
     $reparacion = $stmt->fetchAll()[0];
-
-
     return $reparacion;
+}
+
+function updateCitaAceptar(PDO $con, int $idCita){
+    $stmt = $con->prepare("UPDATE CITA
+                                    SET ACEPTADA = 1
+                                    WHERE ID_CITA = ?");
+    $stmt->execute([$idCita]);
+}
+
+function updateCitaAnular(PDO $con, int $idCita){
+    $stmt = $con->prepare("UPDATE CITA
+                                    SET ANULADO = 1
+                                    WHERE ID_CITA = ?");
+    $stmt->execute([$idCita]);
+}
+
+function deleteCita(PDO $con, int $idCita){
+    $stmt = $con->prepare("DELETE FROM CITA
+                                    WHERE ID_CITA = ?");
+    $stmt->execute([$idCita]);
 }
