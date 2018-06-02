@@ -6,7 +6,7 @@ include_once "modelo/modeloCita.php";
 
 $con = crearConexionBD();
 
-$idUser = 2;
+$idUser = $_SESSION["id_usuario"];
 
 function huecosOcupadosProximaSemana(){
     global $con;
