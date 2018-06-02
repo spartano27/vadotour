@@ -1,0 +1,136 @@
+<?php
+
+include_once 'header.php';
+include_once 'core/utils.php';
+$modForm="";
+include_once 'controlador/admin/controladorAñadirVehiculosConcesionario.php';
+
+if($_SESSION['es_admin']==0){
+    
+    if (!isset($_REQUEST['add'])) {
+        ?>
+    <h1> Vehiculos del Concesionario:</h1>   
+    <<table border=1>
+  <tr>
+    <th>ID_VEHICULO</th>
+	<th>FECHA_SUBIDA</th>
+	<th>VISIBLE</th>
+	<th>MARCA</th>
+	<th>MODELO</th>
+	<th>KILOMETRAJE</th>
+	<th>PRECIO</th>
+	<th>DESCRIPCION</th>
+	<th>ANYO_VEH</th>
+    <th>Column 2 Heading</th>
+  </tr>
+  <?php
+
+  foreach($vehiculos as $vehiculo){
+             echo "<tr>";
+	         echo "<td>";
+			 echo $vehiculo[1];					    
+			 echo "</td>";
+	   	     echo "<td>";
+	   	     echo $vehiculo[2];			    
+		     echo "</td>";
+		     echo "<td>";
+		     echo $vehiculo[3];
+             echo "</td>";
+			 echo "<td>";
+			 echo $vehiculo[4];
+	         echo "</td>";
+			 echo "<td>";
+			 echo $vehiculo[5];
+	         echo "</td>";
+	         echo "<td>";
+	         echo $vehiculo[6];
+	         echo "</td>";
+	         echo "<td>";
+	         echo $vehiculo[7];
+	         echo "</td>";
+	         echo "<td>";
+	         echo $vehiculo[8];
+	         echo "</td>";
+	         echo "<td>";
+	         echo $vehiculo[9];
+	         echo "</td>";
+			 echo "<td>";
+								
+?>
+		<form action="#" method="POST">
+		
+	
+		</form>
+		<br>
+		<form>
+		<input type= "submit" name="ADD" value= "añade un vehiculo">
+		
+		</form>
+<?php
+
+
+	"</td>";
+		echo "</tr>";
+					                            }
+						
+	    echo "</table>";
+						
+        
+        
+        
+    } 
+    
+    
+    
+    if (isset($_REQUEST['ADD'])) {
+        
+        if($modForm==1){
+            $fechaSubida = fromTimeToDate(strtotime($_REQUEST['FECHA_SUBIDA']));
+            $marca = getMarca($con,$_REQUEST['MARCA']);
+            $modelo = getModelo($con,$_REQUEST['MODELO']);
+            $kilometraje = getKilometraje($con,$_REQUEST['KILOMETRAJE']);
+            $precio = getPrecio($con,$_REQUEST['PRECIO']);
+            $descripcion = getDescripcion($con,$_REQUEST['DESCRIPCION']);
+            $anyo_veh = getAnyoVeh($con,$_REQUEST['ANYO_VEH']);
+        }
+        ?>
+        <form action="" method="POST">
+        <?php if($modForm==1){
+            ?><input type="hidden" name="idVeh" value='<?php echo $_REQUEST['id_Vehiculo']?>'>
+							<?php } ?>
+					 Marca: <input type="text" name="marca" value="<?php if($modForm==1){
+								echo $_REQUEST['MARCA'];
+							} ?>"><br>
+							
+					 Modelo: <input type="text" name="modelo" value="<?php if($modForm==1){
+								echo $_REQUEST['MODELO'];
+							} ?>"><br>
+					 Kilometraje: <input type="text" name="kilo" value="<?php if($modForm==1){
+					     echo  $_REQUEST['KILOMETRAJE'];
+							} ?>"><br>
+					 Precio:  <input type="text" name="Precio" value="<?php if($modForm==1){ echo $_REQUEST['PRECIO'] ;}?>"><br>
+					 
+					 
+					Fecha de subida: <input type="date" name="fecha" value="<?php if($modForm==1){
+								echo $fechasubida;
+							} ?>"><br>
+					Año del vehiculo: <input type="text" name="modelo" value="<?php if($modForm==1){
+								echo $_REQUEST['ANYO_VEH'];
+							} ?>"><br>
+					Descripcion: <input type="text" name="modelo" value="<?php if($modForm==1){
+								echo $_REQUEST['DESSCRIPCION'];
+							} ?>"><br>
+					 <input type="submit" name="addVeh<?php echo $modForm;?>" value="<?php if($modForm==1){ echo 'Modificar';}else{ echo 'AÃ±adir';} ?> vehÃ­culo">
+				</form>
+				<a href="AñadirVehiculosConcesionario.php"> Volver</a>
+        <?php 
+        }
+    
+}
+
+           
+else{
+    
+    "no tiene permiso para acceder a este dominio";
+}
+
