@@ -1,0 +1,39 @@
+<?php
+include_once "core/db.php";
+include_once 'modelo/modeloVehiculo.php';
+$con= crearConexionBD();
+$vehiculos = getVehiculosConcesionario($con);
+
+if (isset($_REQUEST['ADD'])){
+    addVehC($con, $_REQUEST['MODELO'],$_REQUEST['MARCA'],$_REQUEST['KILOMETRAJE'],$_REQUEST['ANYO_VEH'],$_REQUEST['FECHA_SUBIDA'],$_REQUEST['DESCRIPCION'],$_REQUEST['PRECIO']);
+    
+}
+
+if(isset($_REQUEST['ADD'])){
+    $vehiculosC= getVehiculosConcesionario($con);
+    
+}
+
+/*  AÑADIR EN MODELO/VEHICULO
+ * 
+ * 
+ * 
+
+function addVehC(PDO $con, $MODELO,$MARCA,$KILOMETRAJE,$ANYO_VEH,$FECHA_SUBIDA,$DESCRIPCION,$PRECIO){
+	$stmt = $conex->prepare("INSERT INTO VEHICULO_CONCESIONARIO (MODELO,FECHA_SUBIDA,MARCA,KILOMETRAJE,ANYO_VEH,DESCRIPCION,PRECIO) VALUES (?,TO_DATE(?,'yyyy/mm/dd'),?,?,?,?,?)  ");
+	$arrayDatos[0]=$MODELO;
+	$arrayDatos[1]=$FECHA_SUBIDA;
+	$arrayDatos[2]=$MARCA;
+	$arrayDatos[3]=$KILOMETRAJE;
+	$arrayDatos[4]=$ANYO_VEH;
+	$arrayDatos[5]=$DESCRIPCION;
+	$arrayDatos[6]=$PRECIO;
+    $stmt ->execute($arrayDatos);
+
+  	$stmt = $conex->prepare("SELECT MAX(ID_VEHICULO) FROM VEHICULO");
+    $stmt ->execute();
+    $idVeh =$stmt->fetchAll();
+
+
+}
+   */
